@@ -7,7 +7,6 @@
 * [Acceptance Criteria](#acceptance-criteria)
 * [Technologies Used](#technologies-used)
 * [Deployment Link](#deployment-link)
-* [Budget Tracker Logic](#budget-tracker-logic)
 * [Application Screen Shot](#application-screen-shot)
 
 
@@ -35,9 +34,6 @@ Given a budget tracker application without an internet connection,
 ## Deployment Link
 The deployment link to display the updated web page is: 
 [GitHub Pages](https://captainrich.github.io/budget-tracker/) 
-
-
-## Budget Tracker Logic
 
 
 

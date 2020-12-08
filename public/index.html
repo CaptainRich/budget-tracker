@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/styles.css">
   
-  <!-- Link in our manifest file to make this a PWA application. -->
+  <!-- Link in our manifest file to make this a PWA (progressive web application). -->
   <link rel="manifest" href="manifest.json">
   
 
@@ -48,10 +48,10 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script src="js/index.js"></script>
 
-  <!-- Add the script file for IndexedDB functionality -->
+  <!-- Add the script file for IndexedDB functionality, for NoSQL client-side storage in the browser -->
   <script src="/js/idb.js"></script>
 
-  <!-- Setup for 'service workers'. This is the required registration. -->
+  <!-- Setup for 'service workers'. This is the required registration. The service-worker intercepts network traffic and if necessary servers data (and pages) from the browsers cache (if offline). -->
   <script>
     (function () {
       if ("serviceWorker" in navigator) {

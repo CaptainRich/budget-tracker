@@ -16,8 +16,8 @@ const request = indexedDB.open('budget-tracker', 1);
 request.onupgradeneeded = function(event) {
     // Save a reference to the database 
     const db = event.target.result;
-    // Create an object store (table) called `new_budget`, set it to have an auto incrementing primary key of sorts 
-    db.createObjectStore('new_budget', { autoIncrement: true });
+    // Create an object store (table) called `new_transaction`, set it to have an auto incrementing primary key of sorts 
+    db.createObjectStore('new_transaction', { autoIncrement: true });
   };
 
 
@@ -30,7 +30,7 @@ request.onsuccess = function(event) {
     // Check if app is online, if yes run uploadBudget() function to send all local db data to api
     if (navigator.onLine) {
       // Send any data in 'indexDB' to the on-line Database once the connection is restored.
-      uploadBudget();
+      uploadTransaction();
     }
   };
   
@@ -47,37 +47,37 @@ request.onsuccess = function(event) {
   // Setup the functions to interact with the DB
 
 
-  // This function will be executed if we attempt to submit a new budget and there's no internet connection
+  // This function will be executed if we attempt to submit a new transaction and there's no internet connection
 function saveRecord(record) {
 
     // Open a new transaction with the database with read and write permissions 
-    const transaction = db.transaction(['new_budget'], 'readwrite');
+    const transaction = db.transaction(['new_transaction'], 'readwrite');
   
     // Access the object store for `new_budget`
-    const budgetObjectStore = transaction.objectStore('new_budget');
+    const transactionObjectStore = transaction.objectStore('new_transaction');
   
     // Add a record to your store with add method
-    budgetObjectStore.add(record);
+    transactionObjectStore.add(record);
   };
 
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Setup the function to transfer the data from indexDB to the on-line database when the Internet connection is restored.
-function uploadBudget() {
+function uploadTransaction() {
     // Open a transaction to the local indexDB
-    const transaction = db.transaction(['new_budget'], 'readwrite');
+    const transaction = db.transaction(['new_transaction'], 'readwrite');
 
     // Access the object store
-    const budgetObjectStore = transaction.objectStore('new_budget');
+    const transactionObjectStore = transaction.objectStore('new_transaction');
 
     // Get all records from store and set to a variable
-    const getAll = budgetObjectStore.getAll();                // Note, 'getAll' is Asynchronous
+    const getAll = transactionObjectStore.getAll();                // Note, 'getAll' is Asynchronous
 
     // Upon a successful .getAll() execution, run this function
     getAll.onsuccess = function () {
         // If there was data in indexedDb's store, send it to the API server
         if (getAll.result.length > 0) {
-            fetch('/api/budgets', {
+            fetch('/api/transactions', {
                 method: 'POST',
                 body: JSON.stringify(getAll.result),
                 headers: {
@@ -91,15 +91,15 @@ function uploadBudget() {
                     throw new Error(serverResponse);
                 }
                 // Open one more transaction
-                const transaction = db.transaction(['new_budget'], 'readwrite');
+                const transaction = db.transaction(['new_transaction'], 'readwrite');
 
-                // Access the new_budget object store
-                const budgetObjectStore = transaction.objectStore('new_budget');
+                // Access the new_transaction object store
+                const budgetObjectStore = transaction.objectStore('new_transaction');
 
                 // Clear all items in your store, don't want to submit again.
-                budgetObjectStore.clear();
+                transactionObjectStore.clear();
 
-                alert('All saved budget data has been submitted!');
+                alert('All saved transaction data has been submitted!');
             })
             .catch(err => {
                 console.log(err);
@@ -111,4 +111,4 @@ function uploadBudget() {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // The eventListener to listen for this application coming back on-line.
-window.addEventListener( 'online', uploadBudget );
+window.addEventListener( 'online', uploadTransaction );

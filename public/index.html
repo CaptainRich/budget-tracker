@@ -9,6 +9,10 @@
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Link in our manifest file to make this a PWA application. -->
+  <link rel="manifest" href="manifest.json">
+  
 
   <title>Budget Tracker</title>
 </head>
@@ -45,7 +49,19 @@
   <script src="js/index.js"></script>
 
   <!-- Add the script file for IndexedDB functionality -->
-  <script src="./public/js/idb.js"></script>
-  
+  <script src="/js/idb.js"></script>
+
+  <!-- Setup for 'service workers'. This is the required registration. -->
+  <script>
+    (function () {
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./service-worker.js")
+          .then(() => console.log("Service Worker registered successfully."))
+          .catch(error => console.log("Service Worker registration failed:", error));
+      }
+    })();   // <!-- This last pair of parenthesis invokes the function immediately.  -->
+  </script>
+
+
 </body>
 </html>

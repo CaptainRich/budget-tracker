@@ -72,12 +72,15 @@ function uploadTransaction() {
 
     // Get all records from store and set to a variable
     const getAll = transactionObjectStore.getAll();                // Note, 'getAll' is Asynchronous
+    
 
     // Upon a successful .getAll() execution, run this function
     getAll.onsuccess = function () {
+        console.log( "Back on-line, recovered transactions are: ", getAll.result );
+
         // If there was data in indexedDb's store, send it to the API server
         if (getAll.result.length > 0) {
-            fetch('/api/transactions', {
+            fetch('/api/transaction', {
                 method: 'POST',
                 body: JSON.stringify(getAll.result),
                 headers: {
@@ -94,9 +97,9 @@ function uploadTransaction() {
                 const transaction = db.transaction(['new_transaction'], 'readwrite');
 
                 // Access the new_transaction object store
-                const budgetObjectStore = transaction.objectStore('new_transaction');
+                const transactionObjectStore = transaction.objectStore('new_transaction');
 
-                // Clear all items in your store, don't want to submit again.
+                // Clear all items in your store, don't want to submit the same transactions again.
                 transactionObjectStore.clear();
 
                 alert('All saved transaction data has been submitted!');

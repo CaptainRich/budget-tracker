@@ -28,6 +28,7 @@ Given a budget tracker application without an internet connection,
 * Service Workers
 * Express.js
 * MongoDB for database functionality
+* PWA capabilities - can be installed on mobile devices if desired
 * Heroku for deployment
 
 

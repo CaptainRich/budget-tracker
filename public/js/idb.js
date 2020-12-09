@@ -102,7 +102,7 @@ function uploadTransaction() {
                 // Clear all items in your store, don't want to submit the same transactions again.
                 transactionObjectStore.clear();
 
-                alert('All saved transaction data has been submitted!');
+                alert('All saved transaction data has been submitted online!');
             })
             .catch(err => {
                 console.log(err);

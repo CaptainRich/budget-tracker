@@ -136,7 +136,11 @@ function sendTransaction(isAdding) {
   })
   .catch(err => {
     // fetch failed, so save in indexed db
-    console.log( "Saving transaction to IndexedDB: ", transaction );
+    if( transaction.value >= 0.0 ) {
+      console.log( "Saving deposit transaction to IndexedDB: ", transaction );
+    } else {
+      console.log( "Saving expense transaction to IndexedDB: ", transaction );
+    }
     saveRecord(transaction);
 
     // clear form

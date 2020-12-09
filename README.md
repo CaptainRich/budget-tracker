@@ -43,4 +43,4 @@ The deployment link to display the updated web page is:
 
 ![Budget-Tracker Image 2](./Images/off-line2.jpg) The second image shows the response (alert) when the system goes back on-line, reporting that the transactions have been saved on-line.
 
-![Budget-Tracker Image 3](./Images/off-line3.jpg) The third image shows the expansion of the console.log data, revealing both transactions were recovered and saved.
+![Budget-Tracker Image 3](./Images/on-line3.jpg) The third image shows the expansion of the console.log data, revealing both transactions were recovered and saved.

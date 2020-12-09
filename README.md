@@ -33,7 +33,7 @@ Given a budget tracker application without an internet connection,
 
 ## Deployment Link
 The deployment link to display the updated web page is: 
-[GitHub Pages](https://captainrich.github.io/budget-tracker/) 
+[Heroku](https://budget-tracker-ray.herokuapp.com/) 
 
 
 
